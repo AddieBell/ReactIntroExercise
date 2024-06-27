@@ -1,0 +1,11 @@
+#watchList {
+  list-style-type: none;
+}
+
+input, label, button {
+  font-size: 1.5rem;
+}
+
+form > * {
+  margin: 0.5rem;
+}

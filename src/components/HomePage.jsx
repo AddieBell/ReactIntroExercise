@@ -1,3 +1,5 @@
+import "./HomePage.css"
+
 function HomePage() {
   return (
     <div>
@@ -7,11 +9,19 @@ function HomePage() {
         <input type="text" id="movieInput" name="movieInput" />
         <button type="submit">Add Movie</button>
       </form>
-      <ul>
-        <li>Harry Potter</li>
-        <li>Lord of the Rings</li>
-        <li>About Time</li>
-        <li>Midnight in Paris</li>
+      <ul id="watchList">
+        <li>
+            <p>Harry Potter</p>
+        </li>
+        <li>
+            <p>Lord of the Rings</p>
+        </li>
+        <li>
+            <p>About Time</p>
+        </li>
+        <li>
+            <p>Midnight in Paris</p>
+        </li>
       </ul>
     </div>
   );
