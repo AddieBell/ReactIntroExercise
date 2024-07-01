@@ -18,3 +18,8 @@ nav {
   list-style-type: square;
   list-style-position: inside;
 }
+
+.sort-buttons button {
+  border: 1px solid white;
+  margin-right: 10px;
+}
