@@ -5,6 +5,7 @@ import {
   getListOf,
   getFilmStats,
 } from "../helpers/film.helpers";
+import { Link } from "react-router-dom";
 
 function FilmsPage() {
   const [movies, setMovies] = useState([]);
@@ -19,13 +20,13 @@ function FilmsPage() {
         return response.json();
       })
       .then((data) => {
-        const moviesData = data.map((film) => ({
-          id: film.id,
-          title: film.title,
-          director: film.director,
-          rt_score: film.rt_score,
-        }));
-        setMovies(moviesData);
+        // const moviesData = data.map((film) => ({
+        //   id: film.id,
+        //   title: film.title,
+        //   director: film.director,
+        //   rt_score: film.rt_score,
+        // }));
+        setMovies(data);
       })
       .catch((err) => {
         console.Error(err);
@@ -44,6 +45,11 @@ function FilmsPage() {
 
   let filmsByDirector = filterFilmsByDirector(movies, searchDirector);
   let directors = getListOf(movies, "director");
+  console.log(filmsByDirector);
+
+  getFilmStats(movies);
+  let { avg_score, total, latest } = getFilmStats(movies);
+  console.log(avg_score, total, latest);
 
   return (
     <div className="container">
@@ -68,6 +74,20 @@ function FilmsPage() {
           </select>
         </div>
       </form>
+      <div>
+        <div>
+          <span># Of Films</span>
+          <span>{total}</span>
+        </div>
+        <div>
+          <span>Average Rating</span>
+          <span>{avg_score.toFixed(2)}</span>
+        </div>
+        <div>
+          <span>Latest Film</span>
+          <span>{latest}</span>
+        </div>
+      </div>
       <div className="sort-buttons">
         <button onClick={() => handleSort("title")}>Sort By Title</button>
         <button onClick={() => handleSort("director")}>Sort By Director</button>
@@ -75,10 +95,11 @@ function FilmsPage() {
       </div>
       <div>
         <ul>
-          {filmsByDirector.map((movie) => (
-            <li key={movie.id}>
-              <strong>{movie.title}</strong> by {movie.director} (Rating:{" "}
-              {movie.rt_score})
+          {filmsByDirector.map((film) => (
+            <li key={film.id}>
+              {/* <strong>{movie.title}</strong> by {movie.director} (Rating:{" "}
+              {movie.rt_score}) */}
+              <Link to={`/film/${film.id}`}>{film.title}</Link>
             </li>
           ))}
         </ul>
